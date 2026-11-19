@@ -1,17 +1,15 @@
-// Leonida 55 — the hand-in program for the gta6-trophy-guide-01 bounty.
-// The guide itself is the static app/ folder next to this file: plain HTML, CSS and
-// ES modules, no build step, and it fetches nothing off the network. Its data lives
-// in app/data/trophies.json (all 55 official PS5 trophies, each with a guide written
-// for this entry and its sources — PowerPyx, Output Lag, GTABase, KeenGamer and
-// Push Square, retrieved 19 November 2026 — plus a stage label, a difficulty
-// estimate and a time estimate of our own), and screenshots/ holds four renders
-// of the app. This program's only job is to assemble the submission: copy app/
-// and screenshots/ into the output directory and write dossier.json there, using
-// the vendored make.fun library so the dossier is byte for byte what the scorer
-// rebuilds. vendor/makefun-frontend.ts stays untouched for exactly that reason.
-// It runs on Node 22 with the standard library only, twice, and both runs must
-// produce identical bytes. Locally, MAKEFUN_OUTPUT_DIR stands in for /output:
+// Leonida 55 — hand-in program (Node 22, standard library only).
+//
+// The guide itself is plain static files under app/: index.html, style.css,
+// the ES modules app.js / state.js / filters.js / panel.js / roadmap.js and
+// the trophy data in app/data/trophies.json. Screenshots live in
+// screenshots/. This program copies both folders into the output directory
+// and writes /output/dossier.json with the kit's vendored library, which is
+// the summary the judge reads. vendor/makefun-frontend.ts is untouched.
+//
+// Run locally to check it:
 //   mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
+// The grader sets MAKEFUN_OUTPUT_DIR itself; without it we use /output.
 
 import { cpSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
@@ -21,23 +19,23 @@ import { buildDossier } from './vendor/makefun-frontend.ts';
 const repoRoot = fileURLToPath(new URL('.', import.meta.url));
 const outputDir = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
 
+const appDir = join(repoRoot, 'app');
+const shotsDir = join(repoRoot, 'screenshots');
+
 mkdirSync(outputDir, { recursive: true });
-cpSync(join(repoRoot, 'app'), join(outputDir, 'app'), { recursive: true });
+cpSync(appDir, join(outputDir, 'app'), { recursive: true });
 mkdirSync(join(outputDir, 'screenshots'), { recursive: true });
-if (existsSync(join(repoRoot, 'screenshots'))) {
-  cpSync(join(repoRoot, 'screenshots'), join(outputDir, 'screenshots'), { recursive: true });
+if (existsSync(shotsDir)) {
+  cpSync(shotsDir, join(outputDir, 'screenshots'), { recursive: true });
 }
 
-// Caps matching the scorer's gate: the text budget is what shapes the dossier's
-// bytes; the rest refuse an entry the scorer would refuse anyway (at most 4
-// screenshots, none over 256 KiB; app/ at most 993 files and directories and
-// 48 MiB, since app/, screenshots/ and dossier.json share /output's 1000-entry cap).
-writeFileSync(
-  join(outputDir, 'dossier.json'),
-  buildDossier(outputDir, {
-    text_max_bytes: 163840,
-    screenshots: { max: 4, max_bytes: 262144 },
-    app_max_files: 993,
-    app_max_bytes: 50331648,
-  }),
-);
+// Caps from the scorer's reference/gate.json: the text cap shapes the
+// dossier's bytes; the others refuse an entry the scorer would refuse
+// (more than 4 screenshots, one over 256 KiB, app/ past 993 files or 48 MiB).
+const dossierText = buildDossier(outputDir, {
+  text_max_bytes: 163840,
+  screenshots: { max: 4, max_bytes: 262144 },
+  app_max_files: 993,
+  app_max_bytes: 50331648,
+});
+writeFileSync(join(outputDir, 'dossier.json'), dossierText);

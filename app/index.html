@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -8,99 +8,83 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="masthead">
-  <div class="masthead-title">
-    <h1>Leonida 55</h1>
-    <p class="subtitle">GTA VI Trophy Guide &amp; Tracker — the complete offline guide for all 55 PlayStation 5 trophies of Grand Theft Auto VI: official names, descriptions and grades, a cited guide for each, stage labels, difficulty and time estimates, a roadmap to the platinum, and one possibly missable trophy.</p>
+<header class="ln-hero">
+  <p class="ln-kicker">Grand Theft Auto VI &middot; PlayStation 5 &middot; Offline guide &middot; No account, no network</p>
+  <div class="ln-title-row">
+    <div>
+      <h1>Leonida 55</h1>
+      <p class="ln-subtitle">GTA VI Trophy Guide &amp; Tracker — all 55 trophies, every guide cited, one road to the platinum.</p>
+    </div>
+    <div class="ln-progress" id="ln-progress" aria-live="polite">
+      <div class="ln-progress-big"><span id="ln-earned-count">0/55</span> <span class="ln-progress-pct" id="ln-earned-pct">0% to the platinum</span></div>
+      <div class="ln-meter"><div class="ln-meter-fill" id="ln-meter-fill" style="width:0%"></div></div>
+      <p class="ln-grade-counts" id="ln-grade-counts">0/1 platinum &middot; 0/2 gold &middot; 0/6 silver &middot; 0/46 bronze &middot; 28 hidden</p>
+    </div>
   </div>
-  <div class="progress-card" id="progressCard">
-    <div class="progress-line"><span id="progressCount">0 / 55 earned</span><span id="progressPct">0%</span></div>
-    <div class="progress-bar"><div id="progressFill"></div></div>
-    <div class="grade-breakdown" id="gradeBreakdown"></div>
-    <p class="platinum-line" id="platinumLine">Platinum: Vice Got a Price! — unlocks with the other 54.</p>
-  </div>
+  <dl class="ln-strip" id="ln-strip">
+    <div><dt>Trophies</dt><dd>55</dd></div>
+    <div><dt>Platinum</dt><dd>1</dd></div>
+    <div><dt>Gold</dt><dd>2</dd></div>
+    <div><dt>Silver</dt><dd>6</dd></div>
+    <div><dt>Bronze</dt><dd>46</dd></div>
+    <div><dt>Hidden</dt><dd>28</dd></div>
+    <div><dt>Possibly missable</dt><dd>1</dd></div>
+    <div><dt>Online</dt><dd>0</dd></div>
+    <div><dt>Platinum time</dt><dd>~200 h</dd></div>
+    <div><dt>Difficulty</dt><dd>4/10</dd></div>
+  </dl>
+  <p class="ln-audit" id="ln-audit">SELF-AUDIT &#10003; 55/55 trophies &middot; 55/55 guides &middot; 55/55 cited &middot; 28/28 hidden marked &middot; 1 possibly missable &middot; 3 unconfirmed — listed honestly &middot; Sources checked 19 Nov 2026</p>
+  <ol class="ln-phases" id="ln-phases"></ol>
+  <p class="ln-banner" id="ln-banner">&#9888; POSSIBLY MISSABLE — <strong>Positive Mental Attitude</strong>: Lucia&rsquo;s balcony meditation in Chapter 1 may be required and disappears after that chapter. Do it early, and keep a manual save from the start of Chapter 1. <button type="button" id="ln-banner-open">Show the guide</button></p>
 </header>
 
-<div class="stat-strip" aria-label="Trophy totals">55 trophies · 1 platinum · 2 gold · 6 silver · 46 bronze · 28 hidden · ~200h · difficulty 4/10</div>
-
-<div class="roadmap-strip" aria-label="Roadmap stages"><span><b>1</b> Story · 60–80h</span><span><b>2</b> Side content</span><span><b>3</b> Partners</span><span><b>4</b> Robberies · Ch. 3–4</span><span><b>5</b> Strangers · 10h</span><span><b>6</b> Grind · 100h</span><span><b>7</b> 100% · final</span></div>
-
-<div class="audit-bar">SELF-AUDIT ✓ 55/55 trophies · 55/55 guides · 55/55 cited · 28/28 hidden · 1 possibly missable · 5 unconfirmed — listed honestly · sources retrieved 19 Nov 2026</div>
-
-<div class="missable-banner" id="missableBanner">
-  <strong>⚠ 1 possibly missable trophy:</strong> <span id="missableText">Positive Mental Attitude — do Lucia’s balcony meditation in Chapter 1 (the morning after Down to Earth) or it may be gone. Keep a manual save at the start of every chapter.</span>
-  <button type="button" id="missableGo">Show it</button>
+<div class="ln-tools" role="search">
+  <input type="search" id="ln-query" placeholder="Search trophies by name or description…  ( / )" aria-label="Search trophies">
+  <div class="ln-chips" id="ln-chips" role="group" aria-label="Filter by kind"></div>
+  <div class="ln-selects">
+    <label>Grade <select id="ln-grade"><option value="all">All grades</option><option value="platinum">Platinum</option><option value="gold">Gold</option><option value="silver">Silver</option><option value="bronze">Bronze</option></select></label>
+    <label>Sort <select id="ln-sort"><option value="roadmap">Roadmap order</option><option value="name">Name A–Z</option><option value="grade">Grade</option><option value="difficulty">Difficulty</option></select></label>
+    <label>Status <select id="ln-status"><option value="all">All trophies</option><option value="earned">Earned</option><option value="not-earned">Not earned yet</option></select></label>
+    <label class="ln-check"><input type="checkbox" id="ln-hide-earned"> Hide earned</label>
+    <label class="ln-check"><input type="checkbox" id="ln-spoilers" checked> Hide story spoilers</label>
+  </div>
+  <div class="ln-actions">
+    <button type="button" id="ln-export">Export progress</button>
+    <button type="button" id="ln-import-btn">Import progress</button>
+    <input type="file" id="ln-import" accept=".json,application/json" hidden>
+    <button type="button" id="ln-reset">Reset</button>
+    <span class="ln-showing" id="ln-showing">Showing 55 of 55</span>
+  </div>
 </div>
 
-<div class="controls" role="toolbar" aria-label="Tracker controls">
-  <input id="search" type="search" placeholder="Search trophies, missions, counts…" aria-label="Search trophies">
-  <div class="chips" id="kindChips" role="group" aria-label="Filter by kind"></div>
-  <label class="grade-label">Grade
-    <select id="grade">
-      <option value="all">All grades</option>
-      <option value="platinum">Platinum</option>
-      <option value="gold">Gold</option>
-      <option value="silver">Silver</option>
-      <option value="bronze">Bronze</option>
-    </select>
-  </label>
-  <label class="sort-label">Sort
-    <select id="sort">
-      <option value="roadmap">Roadmap order</option>
-      <option value="name">Name A–Z</option>
-      <option value="grade">Grade</option>
-    </select>
-  </label>
-  <label class="status-label">Status
-    <select id="status">
-      <option value="all">All</option>
-      <option value="earned">Earned</option>
-      <option value="not-earned">Not earned</option>
-    </select>
-  </label>
-  <label class="hide-label"><input id="hideEarned" type="checkbox"> Hide earned</label>
-  <label class="spoiler-label"><input id="spoilers" type="checkbox"> Hide story spoilers</label>
-  <button id="exportBtn" type="button">Export</button>
-  <button id="importBtn" type="button">Import</button>
-  <input id="importFile" type="file" accept="application/json,.json" hidden>
-  <button id="resetBtn" type="button">Reset</button>
-</div>
-
-<main class="layout">
-  <section class="list-col" aria-label="Trophy checklist">
-    <div class="list-head"><span id="listCount"></span><span id="listHint">Click a trophy to read its guide →</span></div>
-    <div id="trophyList" class="trophy-list"></div>
-    <div id="emptyState" class="empty-state" hidden>
-      <p><strong>No online trophies.</strong> All 55 trophies are single-player and offline — this filter is empty by design, not by mistake. Pick another kind to see the list.</p>
-    </div>
+<main class="ln-split">
+  <section class="ln-list-col" aria-label="Trophy checklist">
+    <article class="ln-nextup" id="ln-nextup" aria-live="polite"></article>
+    <ol class="ln-list" id="ln-list"></ol>
+    <p class="ln-empty" id="ln-empty" hidden>No trophies match these filters. Clear the search or pick another kind.</p>
   </section>
-
-  <aside class="detail-col" aria-label="Guide and roadmap">
-    <section class="nextup" id="nextUpPanel">
-      <h2>Next up</h2>
-      <div id="nextUpBody"><p class="guide-empty">Loading…</p></div>
-    </section>
-    <section class="guide-panel" id="guidePanel" aria-live="polite">
-      <div class="guide-head">
-        <h2 id="guideTitle">Trophy guide</h2>
-        <div class="guide-nav">
-          <button id="prevBtn" type="button">← Previous</button>
-          <button id="nextBtn" type="button">Next →</button>
-        </div>
-      </div>
-      <div id="guideBody"><p class="guide-empty">Select a trophy on the left to read its guide, with sources.</p></div>
-    </section>
-    <section class="roadmap" id="roadmapPanel">
-      <h2>Roadmap to the platinum <span class="roadmap-time">~200 hours · 1 playthrough · 0 online trophies</span></h2>
-      <ol id="roadmapList" class="roadmap-list"></ol>
-      <p class="roadmap-note">Built from the official descriptions: which chapters and missions, which collectibles and counts, in what order. Full detail lives in each trophy’s guide.</p>
-    </section>
+  <aside class="ln-detail-col" aria-label="Trophy guide">
+    <article class="ln-detail" id="ln-detail"></article>
   </aside>
 </main>
 
-<footer class="footnote">
-  <p>Names, descriptions and grades are the official PlayStation 5 list (55 trophies: 1 platinum, 2 gold, 6 silver, 46 bronze; 28 hidden). Guides are written for this entry in our own words and cite their sources beside each trophy. Sources: PowerPyx, Output Lag, GTABase, KeenGamer, Push Square — retrieved 19 November 2026. List cross-checked against Exophase and PSNProfiles, retrieved 19 November 2026. Difficulty and time per trophy are our own estimates, labelled est. Works fully offline — no network requests, progress saved in this browser only.</p>
+<section class="ln-roadmap" aria-label="Roadmap to the platinum">
+  <h2>Roadmap to the platinum</h2>
+  <p class="ln-roadmap-intro">Four stages, in the order we recommend. Counts come from the official trophy descriptions; every stage names the missions or lists it clears. One playthrough, about 200 hours, difficulty 4/10 (PowerPyx). No online trophies, no mission replay — save manually at the start of every chapter.</p>
+  <div class="ln-stage-grid" id="ln-stage-grid"></div>
+</section>
+
+<section class="ln-sources" aria-label="Sources and honesty">
+  <h2>Sources &amp; honesty</h2>
+  <p>Every guide in this entry is written in our own words for this guide, and every guide names where its facts come from. The trophy names, descriptions and grades are PlayStation&rsquo;s own, as listed by Exophase and PSNProfiles. Where the sources disagree — or where no source has confirmed a method yet — this guide says so instead of guessing: Positive Mental Attitude is called <em>possibly</em> missable because it is not yet confirmed whether the Chapter 1 meditation is required, and three trophies (In The Beginning…, Bad Luck, I Guess, Ten Pin) are labelled unconfirmed. No Rockstar logo or artwork is used anywhere in this guide.</p>
+  <ul class="ln-source-list" id="ln-source-list"></ul>
+  <p class="ln-retrieved">All sources retrieved 19 November 2026.</p>
+</section>
+
+<footer class="ln-foot">
+  <p>Leonida 55 — an offline guide. Progress is saved in this browser only (localStorage); export it to keep a backup. No network requests are made at runtime.</p>
 </footer>
+
 <script type="module" src="app.js"></script>
 </body>
 </html>
