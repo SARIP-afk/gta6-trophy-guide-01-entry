@@ -1,11 +1,13 @@
-// Leonida Trophy Atlas — the hand-in program for the gta6-trophy-guide-01 bounty.
+// Leonida 55 — the hand-in program for the gta6-trophy-guide-01 bounty.
 // The guide itself is the static app/ folder next to this file: plain HTML, CSS and
 // ES modules, no build step, and it fetches nothing off the network. Its data lives
 // in app/data/trophies.json (all 55 official PS5 trophies, each with a guide written
-// for this entry and its sources), and screenshots/ holds four renders of the app.
-// This program's only job is to assemble the submission: copy app/ and
-// screenshots/ into the output directory and write dossier.json there, using the
-// vendored make.fun library so the dossier is byte for byte what the scorer
+// for this entry and its sources — PowerPyx, Output Lag, GTABase, KeenGamer and
+// Push Square, retrieved 19 November 2026 — plus a stage label, a difficulty
+// estimate and a time estimate of our own), and screenshots/ holds four renders
+// of the app. This program's only job is to assemble the submission: copy app/
+// and screenshots/ into the output directory and write dossier.json there, using
+// the vendored make.fun library so the dossier is byte for byte what the scorer
 // rebuilds. vendor/makefun-frontend.ts stays untouched for exactly that reason.
 // It runs on Node 22 with the standard library only, twice, and both runs must
 // produce identical bytes. Locally, MAKEFUN_OUTPUT_DIR stands in for /output:

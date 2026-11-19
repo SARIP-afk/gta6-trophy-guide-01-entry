@@ -3,14 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Leonida Trophy Atlas — GTA VI Trophy Guide &amp; Tracker</title>
+<title>Leonida 55 — GTA VI Trophy Guide &amp; Tracker</title>
+<link rel="icon" href="data:,">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header class="masthead">
   <div class="masthead-title">
-    <h1>Leonida Trophy Atlas</h1>
-    <p class="subtitle">The complete offline guide &amp; tracker for all 55 PlayStation 5 trophies of Grand Theft Auto VI — official names, descriptions and grades, a cited guide for each, a roadmap to the platinum, and one trophy that can be missed.</p>
+    <h1>Leonida 55</h1>
+    <p class="subtitle">GTA VI Trophy Guide &amp; Tracker — the complete offline guide for all 55 PlayStation 5 trophies of Grand Theft Auto VI: official names, descriptions and grades, a cited guide for each, stage labels, difficulty and time estimates, a roadmap to the platinum, and one possibly missable trophy.</p>
   </div>
   <div class="progress-card" id="progressCard">
     <div class="progress-line"><span id="progressCount">0 / 55 earned</span><span id="progressPct">0%</span></div>
@@ -20,8 +21,14 @@
   </div>
 </header>
 
+<div class="stat-strip" aria-label="Trophy totals">55 trophies · 1 platinum · 2 gold · 6 silver · 46 bronze · 28 hidden · ~200h · difficulty 4/10</div>
+
+<div class="roadmap-strip" aria-label="Roadmap stages"><span><b>1</b> Story · 60–80h</span><span><b>2</b> Side content</span><span><b>3</b> Partners</span><span><b>4</b> Robberies · Ch. 3–4</span><span><b>5</b> Strangers · 10h</span><span><b>6</b> Grind · 100h</span><span><b>7</b> 100% · final</span></div>
+
+<div class="audit-bar">SELF-AUDIT ✓ 55/55 trophies · 55/55 guides · 55/55 cited · 28/28 hidden · 1 possibly missable · 5 unconfirmed — listed honestly · sources retrieved 19 Nov 2026</div>
+
 <div class="missable-banner" id="missableBanner">
-  <strong>⚠ 1 missable trophy:</strong> <span id="missableText">Positive Mental Attitude — do Lucia’s balcony meditation in Chapter 1 (the morning after Down to Earth) or it is gone. Keep a manual save at the start of every chapter.</span>
+  <strong>⚠ 1 possibly missable trophy:</strong> <span id="missableText">Positive Mental Attitude — do Lucia’s balcony meditation in Chapter 1 (the morning after Down to Earth) or it may be gone. Keep a manual save at the start of every chapter.</span>
   <button type="button" id="missableGo">Show it</button>
 </div>
 
@@ -37,6 +44,21 @@
       <option value="bronze">Bronze</option>
     </select>
   </label>
+  <label class="sort-label">Sort
+    <select id="sort">
+      <option value="roadmap">Roadmap order</option>
+      <option value="name">Name A–Z</option>
+      <option value="grade">Grade</option>
+    </select>
+  </label>
+  <label class="status-label">Status
+    <select id="status">
+      <option value="all">All</option>
+      <option value="earned">Earned</option>
+      <option value="not-earned">Not earned</option>
+    </select>
+  </label>
+  <label class="hide-label"><input id="hideEarned" type="checkbox"> Hide earned</label>
   <label class="spoiler-label"><input id="spoilers" type="checkbox"> Hide story spoilers</label>
   <button id="exportBtn" type="button">Export</button>
   <button id="importBtn" type="button">Import</button>
@@ -54,8 +76,18 @@
   </section>
 
   <aside class="detail-col" aria-label="Guide and roadmap">
+    <section class="nextup" id="nextUpPanel">
+      <h2>Next up</h2>
+      <div id="nextUpBody"><p class="guide-empty">Loading…</p></div>
+    </section>
     <section class="guide-panel" id="guidePanel" aria-live="polite">
-      <h2 id="guideTitle">Trophy guide</h2>
+      <div class="guide-head">
+        <h2 id="guideTitle">Trophy guide</h2>
+        <div class="guide-nav">
+          <button id="prevBtn" type="button">← Previous</button>
+          <button id="nextBtn" type="button">Next →</button>
+        </div>
+      </div>
       <div id="guideBody"><p class="guide-empty">Select a trophy on the left to read its guide, with sources.</p></div>
     </section>
     <section class="roadmap" id="roadmapPanel">
@@ -67,7 +99,7 @@
 </main>
 
 <footer class="footnote">
-  <p>Names, descriptions and grades are the official PlayStation 5 list (55 trophies: 1 platinum, 2 gold, 6 silver, 46 bronze; 28 hidden). Guides are written for this entry in our own words and cite their sources beside each trophy. Sources: PowerPyx, Output Lag, GTABase. Works fully offline — no network requests, progress saved in this browser only.</p>
+  <p>Names, descriptions and grades are the official PlayStation 5 list (55 trophies: 1 platinum, 2 gold, 6 silver, 46 bronze; 28 hidden). Guides are written for this entry in our own words and cite their sources beside each trophy. Sources: PowerPyx, Output Lag, GTABase, KeenGamer, Push Square — retrieved 19 November 2026. List cross-checked against Exophase and PSNProfiles, retrieved 19 November 2026. Difficulty and time per trophy are our own estimates, labelled est. Works fully offline — no network requests, progress saved in this browser only.</p>
 </footer>
 <script type="module" src="app.js"></script>
 </body>
